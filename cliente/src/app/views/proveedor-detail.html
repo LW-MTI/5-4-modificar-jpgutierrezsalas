@@ -1,0 +1,19 @@
+<div class="proveedor-box" *ngIf="proveedor">
+	<div id="proveedor-head-card">
+		<div class="image">
+			<img src="{{url+'get-image-proveedor/'+proveedor.image}}" *ngIf="proveedor.image && proveedor.image != 'null'" >
+		</div>
+		<div class="data">
+			<h1> {{proveedor.nombre}} </h1>
+			<p class="description"> {{proveedor.descripcion}} </p>
+
+			<a *ngIf="identity.role == 'ROLE_ADMIN'" href="#" class="btn btn-default" >Añadir Servicio</a>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+	
+	<div id="gallery-servicios" *ngIf="servicios">
+		<!-- Listar los servicios del proveedor -->
+	</div>
+</div>

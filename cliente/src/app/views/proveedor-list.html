@@ -1,0 +1,29 @@
+<div class="head-page" *ngIf="identity">
+	<h1>{{titulo}}</h1>
+	<a [routerLink]="['/crear-proveedor']" *ngIf="identity && identity.role == 'ROLE_ADMIN'" href="" class="btn btn-default">Añadir Proveedor </a>
+
+	<ul class="pagination pull-right">
+		<li><a [routerLink]="['/proveedores', prev_page]">&laquo;</a> </li>
+		<li><a [routerLink]="['/proveedores', next_page]">&raquo;</a> </li>
+	</ul>
+</div>
+
+<div class="clearfix"></div>
+<ul class="proveedores-list" *ngIf="identity">
+	<li *ngFor="let proveedor of proveedores" class="col-lg-3 proveedor-item" >
+		<div class="proveedor-image">
+			<img src="{{url+'get-image-proveedor/'+proveedor.image}}" >
+		</div>
+		<div class="proveedor-name">
+			<a [routerLink]="['/proveedor', proveedor._id]" >{{proveedor.nombre}}</a>
+			<div class="buttons" *ngIf="identity && identity.role == 'ROLE_ADMIN'" >
+				<a [routerLink]="['/editar-proveedor', proveedor._id]" class="btn btn-sm btn-warning"> Editar</a>
+				<a (click)="onDeleteConfirm(proveedor._id)" class="btn btn-sm btn-danger"> Borrar</a>
+			</div>
+			<div class="seguro" *ngIf="confirmado == proveedor._id">
+				<a (click)="onDeleteProveedor(proveedor._id)" class="btn btn-sm btn-danger"> Eliminar</a>
+				<a (click)="onCancelProveedor()" class="btn btn-sm btn-primary"> Cancelar</a>
+			</div>
+		</div>
+	</li>
+</ul>
